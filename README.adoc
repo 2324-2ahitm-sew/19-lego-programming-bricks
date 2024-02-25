@@ -851,7 +851,7 @@ image::stack.png[]
 ----
 +
 ifdef::env-github[]
-image::erd.svg[]
+image::sortieren-cld-person.svg[]
 endif::[]
 
 ifndef::env-github[]
@@ -873,7 +873,7 @@ image::sortieren-cld-person.svg[]
 endif::[]
 
 ifndef::env-github[]
-[plantuml,erd,png]
+[plantuml,sortieren-cld-person,png]
 ----
 include::plantuml/sortieren-cld-person.puml[]
 ----
