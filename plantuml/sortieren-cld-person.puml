@@ -1,0 +1,10 @@
+@startuml
+
+class Person {
+  -firstName: String
+  -lastName:String
+  -dob:LocalDate
+  -sizeInCm: int
+}
+
+@enduml

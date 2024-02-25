@@ -1,0 +1,6 @@
+@startuml
+class Character {
+  - firstName: String
+  - lastName: String
+}
+@enduml

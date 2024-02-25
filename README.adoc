@@ -1,0 +1,943 @@
+= Übung Lego-Programmier-Bausteine
+Thomas Stütz
+1.0.0, {docdate}
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: src/main/java/at/htl/lego/solution]
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc:
+// :toclevels: 1
+:experimental:
+//https://gist.github.com/dcode/0cfbf2699a1fe9b46ff04c41721dda74?permalink_comment_id=3948218
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+[discrete]
+== Lehrziel
+
+* grundlegende Skills für Programmieren in Java
+
+== Motivation
+
+* Dies ist der Versuch die grundlegenden Skills fürs Programmieren in Form von kleinen Beispielen vorzugeben.
+* Jede dieser kleinen Applikationen deckt eine Funktion ab, die häufig bei komplexeren Programmen verwendet wird.
+* Wenn man diese Beispiele durcharbeitet, sollten die Schüler:innen diese Funktionalitäten wie Lego Bausteine zu einer komplexeren Applikation zusammenfügen können.
+
+== Anleitung
+
+* Installiere Dir das asciidoctor und das plantuml-plugin.
++
+image:asciidoc-plugin.png[]
+image:plantuml-plugin.png[]
+* Es sind teilweise die Musterlösungen enthalten. *Versuche zuerst die Beispiele alleine - ohne Musterlösung - zu erarbeiten*. Wenn das nicht gelingt, schau in der Musterlösung nach.
+* Speichere Deine Lösungen in das `student`-Package. Die Musterlösungen werden (falls verfügbar) in das `solution`-package kopiert.
+* Erstelle für jedes Beispiel eine Klasse zb die Klasse `Bsp01`. Die main-Methode in dieser Klasse ruft die jeweilige Methode auf. Diese soll einen sprechenden Bezeichner haben:
+
+.Beispielscode
+[%collapsible]
+====
+[source,java]
+----
+public class CharBsp01 {
+
+    public static void main(String[] args) {
+
+        System.out.println(toUpperCase('b'));
+
+    }
+
+    /**
+     * Konvertiere einen Kleinbuchstaben in einen Großbuchstaben: 'a' -> 'A'.
+     * Berechne dies mit dem Asciicode.
+     *
+     * @param c ... Kleinbuchstabe
+     * @return Großbuchstaben
+     */
+    static char toUpperCase(char c) {
+
+        if (c >= 'a' && c <= 'z') {
+            return (char) (c - ('a' - 'A'));
+        }
+        return c;
+
+    }
+
+}
+----
+
+.Bildschirmausgabe
+----
+B
+----
+====
+
+* Updaten der Angaben / der Musterlösungen
+
+** Wenn man sich dieses Repository bereits auf den eigenen Rechner gecloned hat möchte man vielleicht neue Beispielsangaben herunterladen, dh man möchte das lokale Repo aktualisieren, ohne die eigenen Beispiele zu verlieren
+
+** Ab Jänner 2024 wird die Funktionsweise von github-classroom geändert (genaues Datum derzeit unbekannt). Die Repos für die Schüler werden dann nicht mehr aus einem Template-Repo erstellt, sondern aus einem Fork des Repos.
+
+** [.line-through]#Dieser Fork kann nun einfacher mit dem Original-Repo synchronisiert werden -> https://docs.github.com/de/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork[GitHub-Dokumentation - Einen Fork synchronisieren^]#
+
+
+== Lego-Programmier-Bausteine
+
+IMPORTANT: Methoden wie `.toUpperCase()`, `.toLowerCase()`, `Double.parseDouble()`, `.split()` ... dürfen verwendet werden, sofern nicht anders angegeben.
+
+
+=== Files
+
+.Grundlagen
+[%collapsible]
+====
+The best way to read a text file in Java depends on the specific requirements of your application. However, the three most common and recommended approaches are:
+
+1. **Using the Files class:** The Files class provides methods for reading entire files into a byte array or a list of lines. This is a straightforward approach that is suitable for small to medium-sized files. However, it is not recommended for large files, as it can load the entire file into memory.
+
+2. **Using the BufferedReader class:** The BufferedReader class reads text from a character-input stream, buffering characters so as to read them more efficiently. This is a good choice for reading large files line by line, as it reads the file incrementally and does not load the entire file into memory.
+
+3. **Using the Scanner class:** The Scanner class is a general-purpose input class that can be used to read text from various sources, including files. It supports different delimiters, allowing you to read text based on specific characters or patterns. This is useful for reading files with specific formatting or structures.
+
+Here's a summary of the pros and cons of each approach:
+
+* **Files:**
+
+** Pros: Simple to use, suitable for small to medium-sized files.
+
+** Cons: Not recommended for large files, can load the entire file into memory.
+
+* **BufferedReader:**
+
+** Pros: Efficient for reading large files line by line.
+
+** Cons: More complex to use than Files.
+
+* **Scanner:**
+
+** Pros: Supports various delimiters, versatile for reading structured files.
+
+** Cons: More complex to use than Files, not as efficient for large files.
+
+In general, if you need to read a small to medium-sized file in its entirety, using the Files class is the simplest and most efficient approach. For large files, using the BufferedReader class is recommended to avoid loading the entire file into memory. And if you need to read files with specific formatting or structures, using the Scanner class can be more efficient and flexible.
+source: https://howtodoinjava.com/java/io/java-write-to-file/[Java Write to File: Clean Code vs. Performance^]
+
+* Weitere Beispiele
+** http://tutego.de/javabuch/aufgaben/io.html[Dateien und wahlfreier Zugriff auf Dateiinhalte^]
+====
+
+.https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/package-summary.html[Java SE 21 API Specification^]
+|===
+|Klasse |Zweck
+
+|InputStream
+|Lesen von Bytes
+
+|OutputStream
+|Schreiben von Bytes
+
+|Reader
+|Lesen von Zeichen
+
+|Writer
+|Schreiben von Zeichen
+
+|BufferedReader
+|Lesen von Zeichen, Arrays und Zeilen mit Pufferung
+
+|BufferedWriter
+|Schreiben von Zeichen, Arrays und Zeilen mit Pufferung
+
+|StringReader
+|Lesen von Zeichen aus einem String
+
+|StringWriter
+|Schreiben von Zeichen in einen String
+
+|FileReader
+|Lesen von Zeichen aus einer Datei
+
+|FileWriter
+|Schreiben von Zeichen in eine Datei
+
+|Printer
+|Schreiben von formatierten Zeichen (High-Level-Klasse)
+|===
+
+
+* Es wird empfohlen zum Erstellen eines FileReaders oder FileWriters nicht eine Instanz mit `new FileReader(...)` zu verwenden sondern die Klasse `Files` mit seinen statischen new...-Methoden zu verwenden (Factory-Pattern)
++
+[source,java]
+----
+Files.newInputStream(
+  Paths.get(fileName)
+), StandardCharsets.UTF_8)
+----
++
+Damit ist man vom lokalen Filesystem unabhängig und kann auf verschiedene Filesysteme zugreifen, wie zB auf das Dropbox-Filesystem https://github.com/fge/java7-fs-dropbox#usage[java-fs-dropbox^].
+
+
+'''
+
+* files.Bsp001: Gegeben ist eine Datei `duck-names.txt` mit folgendem Inhalt:
++
+----
+Donald;Duck
+Dagobert;Duck
+Tick;Duck
+Trick;Duck
+Track;Duck
+Daisy;Duck
+Gustav;Duck
+Dussel;Duck
+Oma Dorette;Duck
+Franz;Gans
+----
+
+** Erstelle eine Java-Klasse `Bsp001.java` im package `at.htl.lego.solution.files`.
+
+** Erstelle eine Methode `readTextFile` die den Inhalt der Datei in einen *String* einliest und diesen zurückgibt.
++
+TIP: Siehe die Folie "Einlesen von Textdateien"
+
+** In der main Methode wird dieser String zeilenweise durchlaufen und in der Console ausgegeben. Dabei werden die Zeilen nummeriert.
++
+** Bildschirmausgabe:
++
+----
+ 1:Donald;Duck
+ 2:Dagobert;Duck
+ 3:Tick;Duck
+ 4:Trick;Duck
+ 5:Track;Duck
+ 6:Daisy;Duck
+ 7:Gustav;Duck
+ 8:Dussel;Duck
+ 9:Oma Dorette;Duck
+10:Franz;Gans
+----
++
+ifndef::env-github[]
+.Lösung
+[%collapsible]
+====
+[source,java]
+----
+include::{sourcedir}/files/Bsp001.java[tag=solution,indent=0]
+----
+====
+endif::[]
+
+'''
+
+* files.Bsp002: Gegeben ist eine Datei `duck-names.txt` mit folgendem Inhalt:
++
+----
+Donald;Duck
+Dagobert;Duck
+Tick;Duck
+Trick;Duck
+Track;Duck
+Daisy;Duck
+Gustav;Duck
+Dussel;Duck
+Oma Dorette;Duck
+Franz;Gans
+----
+
+** Erstelle eine Java-Klasse `Bsp002.java` im package `at.htl.lego.solution.files`.
+
+** Erstelle eine Methode `readTextFile` die den Inhalt der Datei in ein *String-Array* einliest und dieses zurückgibt.
++
+CAUTION: Die Anzahl der Zeilen ist nicht bekannt!
+
+** In der main Methode wird dieser String zeilenweise durchlaufen und in der Console ausgegeben. Dabei werden die Zeilen nummeriert.
+
+** Bildschirmausgabe:
++
+----
+ 1:Donald;Duck
+ 2:Dagobert;Duck
+ 3:Tick;Duck
+ 4:Trick;Duck
+ 5:Track;Duck
+ 6:Daisy;Duck
+ 7:Gustav;Duck
+ 8:Dussel;Duck
+ 9:Oma Dorette;Duck
+10:Franz;Gans
+----
++
+ifndef::env-github[]
+.Lösung
+[%collapsible]
+====
+[source,java]
+----
+include::{sourcedir}/files/Bsp002.java[tag=solution,indent=0]
+----
+
+====
+endif::[]
+
+'''
+
+* files.Bsp003: Schreiben einer Datei aus einem String heraus
+
+** Erstelle eine Java-Klasse `Bsp003.java` im package `at.htl.lego.solution.files`.
+
+** Erstelle eine Methode `writeTextFile` die einen *String* als Parameter entgegennimmt und den Inhalt des Strings in eine Datei `my-file.txt` im Project-Root schreibt.
+
+** Bildschirmausgabe:
++
+----
+Wrote 10 lines to file 'my-file.txt'
+----
++
+ifndef::env-github[]
+.Lösung
+[%collapsible]
+====
+[source,java]
+----
+include::{sourcedir}/files/Bsp003.java[tag=solution,indent=0]
+----
+
+====
+endif::[]
+
+
+
+'''
+
+* files.Bsp004: Schreiben einer Datei aus einem String-Array heraus
+
+** Erstelle eine Java-Klasse `Bsp004.java` im package `at.htl.lego.solution.files`.
+
+** Erstelle eine Methode `writeTextFile` die ein *String-Array* als Parameter entgegennimmt und den Inhalt des Strings in eine Datei `my-file.txt` im Project-Root schreibt.
+
+** Bildschirmausgabe:
++
+----
+Wrote 10 lines to file 'my-file.txt'
+----
++
+ifndef::env-github[]
+.Lösung
+[%collapsible]
+====
+[source,java]
+----
+include::{sourcedir}/files/Bsp004.java[tag=solution,indent=0]
+----
+
+====
+endif::[]
+
+'''
+
+
+
+
+
+==== Erstellen von Pfaden
+
+* files.Bsp005: Erstelle ein Pfad-Objekt das auf die `pom.xml` im Root des Projektfolders verweist. Anschließend wird die `pom.xml` in einen existierenden Folder `files` kopiert und in `pom-copy.xml` umbenannt.
+
+** Verwende hierzu `Paths.get(...)`
+
+** Sowie `System.getProperty("user.dir")`
++
+NOTE: Um Probleme mit den File-Separatoren in den verschiedenen Betriebssystemen zu vermeiden, kann man einen Pfad mit `Paths.get(...)` erstellen in dem die einzelnen Verzeichnisse und Dateien als Strings übergeben werden. Dieser Pfad ist dann unabhängig vom Betriebssystem.
++
+ifndef::env-github[]
+.Lösung
+[%collapsible]
+====
+[source,java]
+----
+include::{sourcedir}/files/Bsp005.java[tag=solution,indent=0]
+----
+====
+endif::[]
+
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== Objektorientierung Grundlagen
+
+* Bsp001:
+Erstellen Sie eine abstrakte Klasse `Vehicle` sowie zwei Unterklassen `Truck` and `PassengerCar` mit folgenden Attributen:
+** `Vehicle`
+*** brand
+*** model
+
+** `Truck`
+*** maxPayload
+
+** `PassengerCar`
+*** maxPassengers
+
+
+
+ifdef::env-github[]
+image::vehicle-truck-passengercar-cld.svg[]
+endif::[]
+
+ifndef::env-github[]
+[plantuml,vehicle-truck-passengercar-cld,png]
+----
+@startuml
+include::plantuml/vehicle-truck-passengercar-cld.puml[]
+@enduml
+----
+endif::[]
+
+** Erstellen Sie eine Klasse `Main` mit einer `main`-Methode, in der Sie jeweils zwei Objekte der Klasse `Truck` und `PassengerCar` erzeugen und in einem Vehicle-Array speichern.
+
+** Anschließend durchlaufen sie das Array und geben die toString()-Methode der einzelnen Objekte aus.
+
+** Durchlaufen Sie das Array erneut und geben Sie die jeweils aus, welche Art von Objekt es ist (Truck oder PassengerCar).
+
+** Bildschirmausgabe:
++
+----
+Opel Blitz (max. 3000 kg Nutzlast)
+Steyr 480 (max. 5000 kg Nutzlast)
+VW Käfer (4 Seats)
+Volvo Sport P1900 (2 Seats)
+
+Truck
+Truck
+PassengerCar
+PassengerCar
+----
+
+'''
+
+* Bsp002:
+Erstellen Sie eine Klasse `Character` mit folgenden Attributen:
++
+ifdef::env-github[]
+image::character-cld.svg[]
+endif::[]
+
+ifndef::env-github[]
+[plantuml,character-cld,png]
+----
+@startuml
+include::plantuml/character-cld.puml[]
+@enduml
+----
+endif::[]
+
+** Ergänzen Sie die Klasse character um Konstruktoren, getter, setter und eine toString()-Methode.
+
+** Es ist ein String gegeben:
++
+[source,java]
+----
+final String CSV_LINE = "Donald;Duck";
+----
+
+** Erstellen Sie eine Methode
++
+[source,java]
+----
+Character parseCsv(String csvLine)
+----
++
+die diesen String im CSV-Format entgegennimmt und ein Character-Objekt zurückgibt.
+
+** In der  `main`-Methode der Klasse `Bsp002` wird die Methode aufgerufen und das Objekt in der Console ausgegeben.
+
+'''
+
+* Bsp003: Erstellen eines Objekts
++
+.YouTube-Videos
+[%collapsible]
+====
+
+.Objektorientierung in Java - Objektorientierte Programmierung in Java Teil 1
+ifdef::env-github[]
+image:https://img.youtube.com/vi/xmSGwipW6NQ/maxresdefault.jpg[link=https://youtu.be/xmSGwipW6NQ&list=PLgZuSc7xewdd9_p_SeFQwJ3PfGJQh3vC_&index=1&t=10]
+endif::[]
+//https://stackoverflow.com/questions/12788287/how-to-get-hq-youtube-thumbnails
+
+ifndef::env-github[]
+//video::xmSGwipW6NQ[youtube]
+https://youtu.be/xmSGwipW6NQ&list=PLgZuSc7xewdd9_p_SeFQwJ3PfGJQh3vC_&index=1&t=10[Youtube: Objektorientierung in Java - Objektorientierte Programmierung in Java Teil 1^]
+endif::[]
+
+
+
+.Erste eigene Klasse - Objektorientierte Programmierung in Java Teil 2
+ifdef::env-github[]
+image:https://i.ytimg.com/vi/P9TRlsyq7gc/maxresdefault.jpg[link=https://youtu.be/P9TRlsyq7gc&list=PLgZuSc7xewdd9_p_SeFQwJ3PfGJQh3vC_&index=2&t=10]
+endif::[]
+
+ifndef::env-github[]
+//video::P9TRlsyq7gc[youtube]
+https://youtu.be/P9TRlsyq7gc&list=PLgZuSc7xewdd9_p_SeFQwJ3PfGJQh3vC_&index=2&t=10[YouTube: Erste eigene Klasse - Objektorientierte Programmierung in Java Teil 2^]
+endif::[]
+
+====
++
+IMPORTANT: Verwenden Sie Getter und Setter!
++
+** Erstellen Sie die Klassen `Schueler` und `Schulhof`
+** In der Klasse `Schulhof` wird die main-Methode erstellt
++
+[source,java]
+----
+public static void main(String[] args) {
+
+    Schueler eins = new Schueler();
+    eins.setName("Jan");
+    eins.setAlter(17);
+    eins.setSchulstufe(12);
+
+    System.out.printf("Hallo, ich bin %s!", eins.getName());
+
+    System.out.printf("%s, %d, geht in die %d. Schulstufe!"
+            , eins.getName()
+            , eins.getAlter()
+            , eins.getSchulstufe()
+    );
+
+    System.out.println();
+    System.out.println();
+
+    eins.setHunger(5);
+    eins.setIq(3);
+
+    eins.chillen();
+    System.out.println("IQ = " + eins.getIq());
+
+    eins.essen();
+    System.out.println("Hunger = " + eins.getHunger());
+
+    eins.lernen();
+    System.out.println("IQ = " + eins.getIq());
+
+}
+----
+
+** Bildschirmausgabe:
++
+----
+Hallo, ich bin Jan!Jan, 17, geht in die 12. Schulstufe!
+
+Jo Bro, ich chill hier!
+IQ = 2
+Ich ess jetzt was!
+Hunger = 4
+Ich lerne jetzt!
+IQ = 3
+----
+
+
+'''
+
+* Bsp004: Erstellen von Konstruktoren
++
+.YouTube-Videos
+[%collapsible]
+====
+
+.Konstruktor - Objektorientierte Programmierung in Java 3
+ifdef::env-github[]
+image:https://img.youtube.com/vi/FKdxjjNdCYM/maxresdefault.jpg[link=https://youtu.be/FKdxjjNdCYM&list=PLgZuSc7xewdd9_p_SeFQwJ3PfGJQh3vC_&index=3&t=10]
+endif::[]
+
+ifndef::env-github[]
+//video::FKdxjjNdCYM[youtube]
+https://youtu.be/FKdxjjNdCYM&list=PLgZuSc7xewdd9_p_SeFQwJ3PfGJQh3vC_&index=3&t=10[YouTube: Konstruktor - Objektorientierte Programmierung in Java 3^]
+endif::[]
+
+
+
+:youtube-id: haaJN5gewZA
+:yt-playlist-id: PLgZuSc7xewdeUFKlT_hVgcpbPVIzkUTmL
+:yt-playlist-index: 27
+
+.Konstruktor - Objektorientierte Programmierung in Java 3
+ifdef::env-github[]
+image:https://img.youtube.com/vi/{youtube-id}/maxresdefault.jpg[link=https://youtu.be/{youtube-id}&list={yt-playlist-id}&index={yt-playlist-index}&t=10]
+endif::[]
+
+ifndef::env-github[]
+//video::{youtube-id}[youtube,list={yt-playlist-id}^]
+https://youtu.be/{youtube-id}&list={yt-playlist-id}&index={yt-playlist-index}&t=10[YouTube: Konstruktor - Objektorientierte Programmierung in Java 3^]
+endif::[]
+
+====
++
+** Erstellen Sie die Klassen `Schueler` und `Schulhof`.
+** In der Klasse `Schulhof` wird die main-Methode erstellt.
+** Ergänzen Sie die Klasse Schüler mit einem Konstruktor, der die Attribute `name`, `alter` und `schulstufe` entgegennimmt.
+** Weiters fügen Sie der Klasse Schüler einen Default-Konstruktor hinzu.
+** In der main-Methode erstellen Sie drei Schüler, die folgende Bildschirmausgabe ergeben:
++
+----
+Jan, 17 Jahre, geht in die 12. Klasse!
+MrBizeps, 22 Jahre, geht in die 10. Klasse!
+Doerte, 15 Jahre, geht in die 9. Klasse!
+----
+
+** Was sind https://www.cool-lab.net/faq/was-sind-instanzvariablen-was-sind-klassenvariablen/[Instanzvariablen^]?
++
+Instanzvariablen gehören zu einer Instanz einer Klasse – also einem Objekt. Jedes Objekt verfügt über seine eigenen Instanzvariablen. Auf eine Instanzvariable v kann mit this.v zugegriffen werden. Falls keine Verwechslungsmöglichkeit mit einer lokalen Variable gleichen Namens besteht, kann man this auch weglassen.
+
+
+
+=== Collections
+
+==== Lists
+
+* Listen bestehen aus Elementen
+* Diese Elemente haben immer einen Datentyp. Entweder eine
+** Wrapper-Klasse eines Primitivdatentyps (zB Integer für int) oder einen
+** Referenztyp wie zB String oder ein Array und weiters
+** Objekttypen, wie zB Person, Kfz, Tier, ...
+* Die CRUD-Methoden (create, read, update und delete) sind bei Listen:
+
+.CRUD-Methoden
+|===
+|Methode |Anwendung
+
+|`add(T element)`
+|Hinzufügen eines Elements zur Liste
+
+|`get(int index)`
+|Lesen eines Elements der Liste
+
+|`remove(int index)` oder `remove(Object o)`
+|Entfernen eines Objects entweder anhand des index oder anhand des Inhalts des Elements
+
+|`set(int index, T element)`
+|ersetzt das Element an der Position `index` mit dem Element `element`
+|===
+
+IMPORTANT: Listen haben noch viele weitere Methoden wie in der  https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html#method-summary[JavaDoc des JDK 21^] ersichtlich ist.
+
+* Erstellen von Listen:
+
+|===
+|Code |Erläuterung
+
+a|
+[source,java]
+----
+List<String> names = new ArrayList<>();
+----
+|Erstellen einer leeren Liste
+
+a|
+[source,java]
+----
+List<String> names = List.of("Donald",
+                             "Dagobert",
+                             "Tick",
+                             "Trick",
+                             "Track"
+                           );
+----
+|Erstellen einer Liste mit mehreren Elementen
+|===
+
+
+* Bsp001: Erstellen Sie eine Liste mit Strings und befüllen Sie diese mit String Objekten
+
+** Erstellen Sie zunächst eine Klasse `ListMgr`
+** In dieser Klasse erstellen Sie die main-Methode
+** Erstellen Sie folgende Methoden:
++
+image::collections-bsp001-methods.png[]
+
+*** Bei den delete-Methoden wird true zurückgegeben, wenn das element gelöscht werden konnte, ansonsten false.
++
+.Beachten Sie beim Löschen!
+image::list-remove-javadoc.png[]
+
+
+** Instanzieren Sie einen ListMgr und erstellen eine Liste von Personen.
++
+image::collections-bsp001-add-elements.png[]
++
+image::collections-bsp001-add-element.png[]
+
+
+.main-Methode
+[%collapsible]
+====
+[source,java]
+----
+public static void main(String[] args) {
+
+    ListMgr personen = new ListMgr();
+
+    personen.create("Anna","Berta", "Cäsar", "Dora", "Emil", "Fridolin", "Gustav", "Heinrich", "Ida", "Julius");
+    System.out.println(personen.list);
+    personen.create("Konrad");
+    System.out.println(personen.list);
+
+    System.out.println("\nLesen von index 25");
+    if (personen.read(25) == null) {
+        System.out.println("An der Stelle 25 gibt es keinen Eintrag zum Lesen");
+    }
+
+    System.out.println("\nLesen von index 5");
+    System.out.println(personen.read(5));
+
+    System.out.println("\nUpdate von index 25");
+    if (!personen.update(25, "Xaver")) {
+        System.out.println("An der Stelle 25 gibt es keinen Eintrag zum Updaten");
+    }
+
+    System.out.println("\nUpdate von index 5");
+    personen.update(5, "Friedrich");
+    System.out.println(personen.list);
+
+    System.out.println("\nLöschen von Friedrich");
+    personen.delete("Friedrich");
+    System.out.println(personen.list);
+
+    System.out.println("\nLöschen von index 2-5");
+    personen.delete(2, 5);
+    System.out.println(personen.list);
+
+    System.out.println("\nLöschen von index 25-27");
+    if (!personen.delete(25, 27)) {
+        System.out.println("Die Liste hat nicht so viele Einträge zum Löschen");
+    }
+    System.out.println(personen.list);
+
+    System.out.println("\nLöschen von index 4 - 7");
+    if (!personen.delete(4, 7)) {
+        System.out.println("Die Liste hat nicht so viele Einträge zum Löschen");
+    }
+    System.out.println(personen.list);
+
+}
+----
+====
+
+.Bildschirmausgabe
+[%collapsible]
+====
+----
+Hinzufügen von 10 Personen
+[Anna, Berta, Cäsar, Dora, Emil, Fridolin, Gustav, Heinrich, Ida, Julius]
+
+Hinzufügen von 1 Person
+[Anna, Berta, Cäsar, Dora, Emil, Fridolin, Gustav, Heinrich, Ida, Julius, Konrad]
+
+Lesen von index 25
+An der Stelle 25 gibt es keinen Eintrag zum Lesen
+
+Lesen von index 5
+Fridolin
+
+Update von index 25
+An der Stelle 25 gibt es keinen Eintrag zum Updaten
+
+Update von index 5
+[Anna, Berta, Cäsar, Dora, Emil, Friedrich, Gustav, Heinrich, Ida, Julius, Konrad]
+
+Löschen von Friedrich
+[Anna, Berta, Cäsar, Dora, Emil, Gustav, Heinrich, Ida, Julius, Konrad]
+
+Löschen von index 2-5
+[Anna, Berta, Heinrich, Ida, Julius, Konrad]
+
+Löschen von index 25-27
+Die Liste hat nicht so viele Einträge zum Löschen
+[Anna, Berta, Heinrich, Ida, Julius, Konrad]
+
+Löschen von index 4 - 7
+Die Liste hat nicht so viele Einträge zum Löschen
+[Anna, Berta, Heinrich, Ida, Julius, Konrad]
+----
+====
+
+
+
+
+
+
+* Bsp002: Erstellen Sie die CRUD-Methoden für ein Set von Autos (Klasse `Vehicle`) in einer Klasse `VehicleMgr`.
+
+** Die Klasse `Vehicle` hat folgende Attribute:
+*** brand
+*** model
+
+** Verwenden Sie das Interface https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html[`Set`^] und die Implementierung `HashSet` für das Set;
+
+** Dokumentieren Sie in einem Asciidoctor-Dokument "Collections.adoc" die benötigten Methoden.
+
+
+
+
+
+
+* Bsp003: Erstellen Sie die CRUD-Methoden für eine Map von Fussballern (Klasse `Player`) in einer Klasse `SoccerMgr`.
+
+** Die Klasse `Player` hat folgende Attribute:
+*** playersNumber (Trikotnummer)
+*** firstName
+*** lastName
+
+** Verwenden Sie das Interface https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html[`Map`^] und die Implementierung `HashMap` für die Map;
+
+** Dokumentieren Sie in einem Asciidoctor-Dokument "Collections.adoc" die benötigten Methoden.
+
+
+
+* Bsp004: Erstellen Sie einen Stapel von Karten (Klasse `Card`) in einer Klasse `CardStack`.
+
+** Verwenden Sie das Interface https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html[`List`^] und die Implementierung `LinkedList` für den Stack;
+
+** Verwenden Sie dabei folgende Methoden:
++
+image::stack.png[]
+
+** Für die Kartenfarben (hearts, diamonds, spades, clubs) verwenden Sie eine Enumeration, ebenso für die Kartenwerte (Jack (Unter), Queen (Ober), King, Ace, Ten).
+
+** Die Klasse `Card` hat folgende Attribute:
+*** cardColor
+*** cardValue
+
+** In der main-Methode werden 20 Karten erstellt und auf den Stapel gelegt.
+** Anschließend werden die Karten gemischt und eine nach der anderen vom Stapel genommen und in der Console ausgegeben.
+
+
+=== Sortieren
+
+* Bsp 001: Erstellen Sie eine Klasse Person, sowie eine Klasse `PersonenSortierer`
+
+** Mit einem Menü kann man auswählen wie die Liste sortiert wird
++
+----
+1 ... Person eingeben
+2 ... Liste nach Nachnamen / Vornamen sortiert ausgeben
+3 ... Liste nach Alter absteigend ausgeben
+4 ... Liste nach Größe aufsteigend ausgeben
+0 ... Programm beenden
+----
++
+ifdef::env-github[]
+image::erd.svg[]
+endif::[]
+
+ifndef::env-github[]
+[plantuml,sortieren-cld-person,png]
+----
+include::plantuml/sortieren-cld-person.puml[]
+----
+endif::[]
+
+** Verwenden Sie als natürliche Sortierung Nachnamen und als zweites Kriterium den Vornamen
+** Verwenden Sie hierfür den *Einfüge-Sort*
+
+IMPORTANT: Die Verwendung der Sort-Funktion von Collections ist nicht erlaubt.
+
+* Bsp 002: Erstellen Sie eine Klasse Person, sowie eine Klasse `PersonenSortierer`
++
+ifdef::env-github[]
+image::sortieren-cld-person.svg[]
+endif::[]
+
+ifndef::env-github[]
+[plantuml,erd,png]
+----
+include::plantuml/sortieren-cld-person.puml[]
+----
+endif::[]
+
+** Lesen Sie die Namen der Datei link:files/names.csv[names.csv] in ein Person-Array ein.
+** Verwenden Sie als natürliche Sortierung Nachnamen und als zweites Kriterium den Vornamen
+** Generieren Sie für jede Person ein Datum per Zufallsgenerator zwischen 1.1.2006 und 31.12.2008.
+** Generieren Sie für jede Person eine Größe per Zufallsgenerator zwischen 160 cm und 200 cm.
+** Mit einem Menü kann man auswählen wie die Liste sortiert wird
++
+----
+1 ... Person aus Datei einlesen
+2 ... Liste nach Nachnamen / Vornamen sortiert ausgeben (Grundsortierung)
+3 ... Liste nach Alter absteigend ausgeben (Bubble-Sort)
+4 ... Liste nach Größe aufsteigend ausgeben (Einfüge-Sort)
+0 ... Programm beenden
+----
+
+** Zum Sortieren erstellen Sie jeweils ein neues Array, in dem die Personen ausgehend von der ursprünglichen Sortierung eingefügt werden.
+
+IMPORTANT: Die Verwendung der Sort-Funktion von Collections ist nicht erlaubt.
+
+
+
+
+
+
+
+
+
+
+////
+.Programmablaufplan
+[xxx%collapsible]
+====
+image::https://www.plantuml.com/plantuml/png/ZPBDZjCm4CVlVefXJwq4PVb0GYsBjeYFtGj2eENkn9DajCuuiiTKubauyWnxufONmoIjoQgYuMZD__VxZpI-3AAznDQg1vtNTQiX1loANgZKzhe2nsf8gFMxDTIuexAHpVZm3aF0ZQ8A5aLBy0gUl5ozM88qoB0G7t6f0DPfz5aBSGqNS7R3WdwlETiej07_uazdu8_Ejzh-YtvsVfhkVnIv-Z5yylrFRQXpWKI7OzdCAjkCmk8zYbYaWkfR95d21wyDN1yfdv__jt8q71IZuFL5CYHg5XivDbGf5NOaPRF8m5AL-ezmUePXa-qQRhe0Z-0B8JIwG8PfPhNPW_a4KpBrIhI47XzE-1oz9pXrXOFlodMTjlhUDbCk3OmESDlVCGj2qTybCx91pZNpzpcKRPCmShql2yG6gWoiu6qoxCYRkPPHcgrNP2jCpZT8S9o2jlyL0l9GQJnndRomIm699-nPFt25rx5iaiHWHKn2to2uoda194Q6hVykoPNCuozGGLodBjCxjlOt[]
+====
+////
+
+
+
+
+
+== Tooling
+
+* https://plantuml.com/de/[PlantUML^]
+* https://structorizer.fisch.lu[Structorizer^]
+
+
+== Sources
+
+* https://www.cool-lab.net/faqs-java/[FAQs Java^]
+* https://www.cool-lab.net/faqs-programmieren-lernen/[FAQs Programmieren lernen^]
+* https://www.youtube.com/playlist?list=PLO-P6W97sI0Q-o0oZy8NeUgi0s5WKK8IV[Jonas Keil - Programmieren lernen - Java Basics^]
+
+
+----
+ __      ___      _    _____                     _
+ \ \    / (_)    | |  / ____|                   | |
+  \ \  / / _  ___| | | (___  _ __   __ _ ___ ___| |
+   \ \/ / | |/ _ \ |  \___ \| '_ \ / _` / __/ __| |
+    \  /  | |  __/ |  ____) | |_) | (_| \__ \__ \_|
+     \/   |_|\___|_| |_____/| .__/ \__,_|___/___(_)
+                            | |
+                            |_|
+----

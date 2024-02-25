@@ -1,0 +1,10 @@
+.idea/
+*.iml
+target/
+db/
+.DS_Store
+*.jar
+README.html
+.env
+solutionslocal/
+javadoc/

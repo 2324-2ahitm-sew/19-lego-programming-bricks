@@ -1,0 +1,10 @@
+Donald;Duck
+Dagobert;Duck
+Tick;Duck
+Trick;Duck
+Track;Duck
+Daisy;Duck
+Gustav;Duck
+Dussel;Duck
+Oma Dorette;Duck
+Franz;Gans
