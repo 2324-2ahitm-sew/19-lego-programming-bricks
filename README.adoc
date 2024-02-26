@@ -897,7 +897,7 @@ endif::[]
 
 IMPORTANT: Die Verwendung der Sort-Funktion von Collections ist nicht erlaubt.
 
-
+* Bsp 003: Ändern sie Bsp 002 so ab, dass die Sortierung innerhalb eines Array erfolgt.
 
 
 
